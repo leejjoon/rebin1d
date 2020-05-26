@@ -183,3 +183,38 @@ class AccumulatedInterpLinear(AccumulatedInterpBase):
             print(sa, sb, sc)
 
         return sa + sb + sc
+
+
+class AccumulatedInterpLineList(AccumulatedInterpBase):
+    def __init__(self, x, y):
+        """
+        x : line location
+        y : line flux
+        """
+        self.x = x
+        self.acc_y_padded = np.concatenate([[0],
+                                            np.add.accumulate(y)])
+
+    def integrate_to(self, x1):
+        idx = np.searchsorted(self.x, x1)
+        flux = self.acc_y_padded[idx]
+
+        return flux
+
+    # def get_spec_accumulated(self, um):
+    #     # should return accumulated spectrum at given points.
+    #     return self.integrate_to(um)
+
+    # def get_sb_after_filter(self, um, resp):
+    #     # assume that wavelength range is along axis=0.
+    #     # But this is not efficient.
+
+    #     sa = self.get_spec_accumulated(um)
+    #     sp = sa[1:] - sa[:-1]
+    #     dum = um[1:] - um[:-1]
+
+    #     respp = .5 * (resp[1:] + resp[:-1])
+    #     sb = np.sum(sp/dum * respp, axis=0)
+
+    #     # sb = np.sum(s * resp, axis=0)
+    #     return sb

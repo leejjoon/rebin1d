@@ -1,7 +1,9 @@
 from .intp_integrated import (AccumulatedInterpNN,
                               AccumulatedInterpDrizzle,
-                              AccumulatedInterpLinear)
+                              AccumulatedInterpLinear,
+                              AccumulatedInterpLineList)
 
 __ALL__ = ["AccumulatedInterpNN",
            "AccumulatedInterpDrizzle",
-           "AccumulatedInterpLinear"]
+           "AccumulatedInterpLinear",
+           "AccumulatedInterpLineList"]
